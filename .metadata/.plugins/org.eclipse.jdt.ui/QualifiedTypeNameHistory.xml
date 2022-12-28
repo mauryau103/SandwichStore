@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.db.MyConnection"/>
+    <fullyQualifiedTypeName name="com.pojo.Sand"/>
+    <fullyQualifiedTypeName name="org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1"/>
+</qualifiedTypeNameHistroy>

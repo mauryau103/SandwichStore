@@ -1,0 +1,28 @@
+package com.model;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.db.MyConnection;
+import com.pojo.Sand;
+
+public class SandImpl {
+
+	public List<Sand> getAllSand(){
+		String sql="select * from food";
+		List<Sand> sandList=new ArrayList<>();
+		try(Connection conn=MyConnection.connect()){
+			
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+}
+ 

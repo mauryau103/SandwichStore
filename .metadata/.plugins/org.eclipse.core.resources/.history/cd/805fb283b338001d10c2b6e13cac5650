@@ -1,0 +1,44 @@
+package com.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.db.MyConnection;
+import com.pojo.Sand;
+
+public class SandImpl {
+
+	public List<Sand> getAllSand(){
+		String sql="select * from food";
+		List<Sand> sandList=new ArrayList<>();
+		try(Connection conn=MyConnection.connect()){
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			System.out.println(rs.getClass());
+			
+			while(rs.next()) {
+				int id=rs.getInt("foodid");
+				String name=rs.getString("foodname");
+				String category=rs.getString("category");
+				int price=rs.getInt("price");
+				String active=rs.getString("active");
+				Sand sand=new Sand(id,name,category,price,active);
+				sandList.add(sand);
+			}
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return sandList;
+	}
+	
+}
+ 

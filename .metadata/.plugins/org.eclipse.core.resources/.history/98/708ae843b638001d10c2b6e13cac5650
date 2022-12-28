@@ -1,0 +1,125 @@
+package com.servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.model.SandImpl;
+import com.model.UserImpl;
+import com.pojo.Sand;
+import com.pojo.SandUser;
+
+/**
+ * Servlet implementation class SandServlet
+ */
+@WebServlet("/SandServlet")
+public class SandServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SandServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		SandImpl sandimpl=new SandImpl();
+		HttpSession session = request.getSession();
+		String sandAction = request.getParameter("act");
+		if(sandAction.equalsIgnoreCase("getall")) {
+			List<Sand> sandList=sandimpl.getAllSand();
+			session.setAttribute("sList",sandList);
+			response.sendRedirect("admin/allFoodEditFood.jsp");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	String userAction=request.getParameter("act");
+		
+		SandImpl sandimpl=new SandImpl();	
+		
+		if(userAction.equalsIgnoreCase("addNewFoodAction")) {
+			int id=Integer.parseInt(request.getParameter("foodid"));
+			String name=request.getParameter("name");	
+			String category=request.getParameter("category");
+			int price=Integer.parseInt(request.getParameter("price"));
+			String password=request.getParameter("password");
+			String address="";
+			String city="";
+			String state="";
+			String country="";
+			
+			Sand sand=new Sand();
+			sand.setName(name);
+			sand.setUsername(username);
+			sand.setMobileNo(mobile);
+			sand.setEmailId(emailId);
+			sand.setPassword(password);
+			sand.setAddress(address);
+			sand.setCity(city);
+			sand.setState(state);
+			sand.setCountry(country);
+			
+			boolean b=sandimpl.register(sanduser);
+			if(b)
+				response.sendRedirect("SignUp.jsp?msg=valid");
+			else
+				response.sendRedirect("SignUp.jsp?msg=invalid");
+		}
+		else if(userAction.equalsIgnoreCase("loginAction")) {
+			
+			String username=request.getParameter("username");
+			String password=request.getParameter("password");
+	
+			String name=impl.login(username, password);
+			if("admin".equals(username)&& "admin".equals(password)){
+					HttpSession session=request.getSession();   
+					session.setAttribute("username",username);
+					response.sendRedirect("admin/adminHome.jsp");
+			}
+			else if(name!=null) {
+				HttpSession session=request.getSession();
+				session.setAttribute("username", username);
+				response.sendRedirect("UserHome.jsp");
+			}
+			else
+				response.sendRedirect("login.jsp?msg=notexist");
+			
+		}
+		else if (userAction.equalsIgnoreCase("changePasswordAction")) {
+			
+			String emailid=request.getParameter("email");
+			String username=request.getParameter("username");
+			String newpassword=request.getParameter("password");
+
+			SandUser sanduser=new SandUser();
+			sanduser.setUsername(username);
+			sanduser.setEmailId(emailid);
+			sanduser.setPassword(newpassword);
+			 boolean b=impl.forgetpasswordtest(sanduser);
+			if(b)
+				response.sendRedirect("ForgetPassword.jsp?msg=done");
+			else
+				response.sendRedirect("ForgetPassword.jsp?msg=invalid");
+		}
+		
+	}
+
+}

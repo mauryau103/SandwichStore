@@ -1,0 +1,17 @@
+package com.pojo;
+
+public class Sand {
+	private int id;
+	private String name;
+	private String category;
+	private float price;
+	private String active;
+	
+	
+	public Sand() {
+		super();
+	}
+
+	
+	
+}

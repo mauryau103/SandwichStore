@@ -1,0 +1,126 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e3e7eb;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+main{
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px;
+}
+
+section{
+    padding: 50px;
+    
+}
+
+h1{
+    margin: 0;
+}
+
+h4{
+    color: gray;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: .8rem;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    gap: 5px;
+}
+
+.input-field{
+    padding: 10px 6px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.recover-password{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recover-password div{
+    display: flex;
+    gap: 2px;
+}
+
+.recover-password p{
+    font-size: .85rem;
+}
+
+.recover-password input{
+    margin: 0;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cta{
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.sign-in{
+    color: white;
+    background-color: #111727;
+    border: 1px solid #111727;
+}
+
+.google{
+    background-color: transparent;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.google-icon{
+    width: 18px;
+}
+
+figure{
+    margin: 0;
+    position: relative;
+}
+
+figure div{
+    position: absolute;
+    z-index: 1001;
+    top: 10px;
+    background-color: white;
+    margin: 20px;
+    padding: 10px 10px;
+    border-radius: 6px;
+    opacity: 70%;
+}
+
+img{
+    height: 100%;
+    width: auto;
+}
+
+@media screen and (max-width: 700px) {
+    figure{
+        display: none;
+    }
+}

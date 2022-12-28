@@ -1,0 +1,86 @@
+package com.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.db.MyConnection;
+import com.pojo.Sand;
+import com.pojo.SandUser;
+
+public class SandImpl {
+
+	public List<Sand> getAllSand(){
+		String sql="select * from food";
+		List<Sand> sandList=new ArrayList<>();
+		try(Connection conn=MyConnection.connect()){
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			System.out.println(rs.getClass());
+			
+			while(rs.next()) {
+				int id=rs.getInt("foodid");
+				String name=rs.getString("foodname");
+				String category=rs.getString("category");
+				int price=rs.getInt("price");
+				String active=rs.getString("active");
+				Sand sand=new Sand(id,name,category,price,active);
+				sandList.add(sand);
+			}
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return sandList;
+	}
+	
+	public boolean addFood(Sand sand){
+		boolean state=false;
+		try(Connection conn=MyConnection.connect()){
+			String sql="insert into food values(?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,sand.getId());
+			pstmt.setString(2, sand.getName());
+			pstmt.setString(3, sand.getCategory());
+			pstmt.setFloat(4, sand.getPrice());
+			pstmt.setString(5, sand.getActive());
+			
+			int no =pstmt.executeUpdate();
+			if(no>0)
+				state=true;
+			
+			
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return state;
+		
+	}
+	
+	public boolean updateFood(Sand sand) {
+		boolean state=false;
+		try(Connection conn=MyConnection.connect()){
+			
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return state;
+	}
+}
+ 
